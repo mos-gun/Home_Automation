@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="bpaneWindowCreate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.homeauto.controller.OpenPlanController">
+    <top>
+        <ToolBar fx:id="toolbarHeader" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+            <Button fx:id="btnHideBackground" mnemonicParsing="false" onAction="#hideBackground" text="Gitter ausblenden" />
+            <Button fx:id="btnEditPlan" mnemonicParsing="false" onAction="#editPlan" text="Zum Bearbeitungsmodus" />
+            </items>
+        </ToolBar>
+    </top>
+    <left>
+        <VBox fx:id="vboxIcons" alignment="TOP_CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="btnDefaultCursor" mnemonicParsing="false" onAction="#insertDefault" onMouseClicked="#backToDefaultCursor" prefHeight="60.0">
+                    <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0">
+                            <Image url="@../images/maus1.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnLamp" mnemonicParsing="false" onAction="#insertLamp" onMouseClicked="#placeLamp" onMousePressed="#placeLamp" prefHeight="60.0">
+                    <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0">
+                            <Image url="@../images/licht2.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnThermo" mnemonicParsing="false" onAction="#insertThermo" onMouseClicked="#placeThermo" prefHeight="60.0">
+                    <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0">
+                            <Image url="@../images/thermo3.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnWall" mnemonicParsing="false" onAction="#insertWall" onMouseClicked="#placeWall" prefHeight="60.0">
+                    <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0">
+                            <Image url="@../images/wand1.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>
+            <Button fx:id="btnTrashCan" mnemonicParsing="false" onAction="#insertTrash" onMouseClicked="#placeTrashCan" prefHeight="60.0" prefWidth="66.0">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="33.0">
+                     <image>
+                        <Image url="@../images/trashCan.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            </children>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <padding>
+                <Insets top="100.0" />
+            </padding>
+        </VBox>
+    </left>
+    <center>
+        <TitledPane fx:id="tpaneCenter" animated="false" collapsible="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt;Bezeichnung des Grundrisses&gt;" BorderPane.alignment="CENTER">
+            <content>
+                <AnchorPane fx:id="apaneDrawingField">
+               <children>
+                  <Pane fx:id="paneDrawingField" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="484.0" prefWidth="732.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                      <ImageView fx:id="imgBackground" fitHeight="485.0" fitWidth="734.0" layoutX="-10.0" layoutY="-10.0">
+                          <Image url="@../images/Gitterlinie.png" />
+                      </ImageView>
+                     <Slider fx:id="sliderTemperature" blockIncrement="5.0" layoutX="672.0" layoutY="21.0" majorTickUnit="5.0" max="35.0" minorTickCount="2" orientation="VERTICAL" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="20.0" />
+                     <Text fx:id="txtSliderTemperature" layoutX="656.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Regler (°C)" />
+                  </Pane>
+                  <Text fx:id="txtThermo1" layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bitte warten..." visible="false" />
+                  <Text fx:id="txtThermo2" layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bitte warten..." visible="false" />
+                  <Text fx:id="txtThermo3" layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bitte warten..." visible="false" />
+               </children></AnchorPane>
+            </content>
+        </TitledPane>
+    </center>
+    <bottom>
+        <HBox fx:id="hboxFooter" alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelDrawing" text="Abbrechen">
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveDrawing" text="Speichern" />
+                <Button fx:id="btnConfirmName" mnemonicParsing="false" onAction="#confirmName" text="Bestätigen">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <HBox.margin>
+                        <Insets left="80.0" />
+                    </HBox.margin>
+                </Button>
+                <TextField fx:id="txtfldName" nodeOrientation="LEFT_TO_RIGHT" onAction="#confirmName" onKeyReleased="#checkInput" prefWidth="200.0" promptText="Bsp.: Mike's Wohnung" />
+            <ImageView fx:id="imgNameCheck" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
+</BorderPane>
